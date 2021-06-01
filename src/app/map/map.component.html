@@ -1,0 +1,45 @@
+<h2>Map works!</h2>
+
+<agm-map #myMap [fitBounds]="true" (mapClick)="onMapClicked($event)" [latitude]="searchResult.lat" [longitude]="searchResult.long">
+        <!-- <agm-marker *ngFor="let home of homesArray" #marker
+            [latitude]="home.lat" 
+            [longitude]="home.long"
+            [agmFitBounds]="true">
+            <agm-info-window #infoWindow 
+            [latitude]="home.lat" 
+            [longitude]="home.long">
+            {{home.address}}
+        </agm-info-window>
+    </agm-marker> -->
+    <agm-marker-cluster imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m" [gridSize]="30" [zoomOnClick]="false" (clusterClick)="onClusterClick()">
+        <app-custom-marker [agmFitBounds]="home.fitBounds" *ngFor="let home of homesArray" [latitude]="home.lat" [longitude]="home.long">
+            <agm-overlay [latitude]="home.lat" [longitude]="home.long">
+                <div *ngIf="home.address" style="padding:10px;width:50;height:30px15px;background-color:pink;border-radius: 5px;  border: solid white 3px;">
+                    {{home.address}}
+                </div>
+                <agm-info-window><b>{{home.imageInfo?.title}}</b></agm-info-window>
+                <!-- <agm-info-window>
+                    <div class="">
+                        <img src="assets/image.jpg" style="height: 100px; width: 50px;">
+                    </div>
+                </agm-info-window> -->
+            </agm-overlay>
+        </app-custom-marker>
+    </agm-marker-cluster>
+
+    <agm-direction [origin]="origin" [destination]="destination1" *ngIf="showDirections"></agm-direction>
+    <agm-direction [origin]="origin" [destination]="destination2" *ngIf="showDirections"></agm-direction>
+
+</agm-map>
+
+<div>
+    <h3 class="clickedLatLong"></h3>
+    <h4 class="clickedAddress"></h4>
+</div>
+
+<button style="border-color: rgb(97, 149, 195); border-style: solid; border-radius: 10px; padding: 10px;" (click)="showNearbySchools()"><b>SHOW SCHOOLS</b></button><br><br>
+<button style="border-color: rgb(97, 149, 195); border-style: solid; border-radius: 10px; padding: 10px;" (click)="toggleShowDirections()"><b>SHOW DIRECTIONS</b></button><br><br>
+ <div class="form-group">
+    <label>Enter address</label>
+    <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Search Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
+</div>

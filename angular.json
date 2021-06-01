@@ -21,7 +21,8 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {"input": "./node_modules/@google/markerclustererplus/images", "glob": "*", "output": "/images"}
             ],
             "styles": [
               "src/styles.css"
