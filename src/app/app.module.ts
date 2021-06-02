@@ -21,7 +21,7 @@ import { AgmDirectionModule } from 'agm-direction';
     HttpClientModule,
     AppRoutingModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDf8AjYW1CxfkedsLLZNfaYRJfZYCTSj08',
+      apiKey: 'API_KEY_HERE',
       libraries: ['places'],
     }),
     AgmOverlays,
